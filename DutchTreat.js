@@ -39,14 +39,14 @@ function AddCol(){
         NewCell.className='pay'
         Newinput.addEventListener('click',CheckClick)
         Newinput.className='unchecked'
-        NewCell.appendChild(Newinput)
         for(let j=1;j<M-1;j++){
             if(T.rows[i].cells[j].childNodes[0].className==='checked'){
-                Newinput='disabled'
-                Newinput=true
+                Newinput.className='disabled'
+                Newinput.disabled=true
                 break
             }
         }
+        NewCell.appendChild(Newinput)
     }
     M++
 }
