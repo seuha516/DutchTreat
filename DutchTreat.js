@@ -40,9 +40,9 @@ function AddCol(){
         Newinput.addEventListener('click',CheckClick)
         Newinput.className='unchecked'
         NewCell.appendChild(Newinput)
-        for(let j=0;j<M-1;j++){
+        for(let j=1;j<M-1;j++){
             if(T.rows[i].cells[j].childNodes[0].className==='checked'){
-                T.rows[i].cells[M-1].childNodes[0].className='unchecked'
+                T.rows[i].cells[M-1].childNodes[0].className='disabled'
                 T.rows[i].cells[M-1].childNodes[0].disabled=true
                 break
             }
