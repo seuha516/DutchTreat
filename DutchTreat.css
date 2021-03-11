@@ -92,8 +92,6 @@ input::placeholder{
     overflow-x: auto;
     white-space: nowrap;
     border-color: white;
-    display: flex;
-    flex-wrap: nowrap;
 }
 #ResultPage > div:first-child{
     font-weight: 900;
@@ -116,13 +114,11 @@ input::placeholder{
     font-size: 20px;
     border: 20px;
     margin-right: 20px;
-    flex-shrink: 0;
 }
 .Longtext{
     width: 1500px;
     position: relative;
     margin-right: 20px;
-    flex-shrink: 0;
     margin-bottom: 5px;
 }
 .Longtext:last-child:after{
