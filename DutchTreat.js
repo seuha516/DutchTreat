@@ -42,8 +42,8 @@ function AddCol(){
         NewCell.appendChild(Newinput)
         for(let j=1;j<M-1;j++){
             if(T.rows[i].cells[j].childNodes[0].className==='checked'){
-                T.rows[i].cells[M-1].childNodes[0].className='disabled'
-                T.rows[i].cells[M-1].childNodes[0].disabled=true
+                Newinput='disabled'
+                Newinput=true
                 break
             }
         }
