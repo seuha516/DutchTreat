@@ -76,3 +76,60 @@ input::placeholder{
     font-size: small;
     font-weight: bold;
 }
+#ResultPage{
+    width: 700px;
+    height: 600px;
+    position: fixed;
+    border-style: outset;
+    border-radius: 15px;
+    padding: 20px;
+    top:50px;
+    left:50px;
+    font-size: 25px;
+    font-weight: 500;
+    background-color: rgb(235, 235, 235);
+    visibility: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
+#ResultPage > div:first-child{
+    font-weight: 900;
+    font-size: 30px;
+}
+#Due{
+    font-weight: 700;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+#CloseButton{
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    position: fixed;
+    top: 75px;
+    left: 735px;
+}
+#DetailText{
+    font-size: 20px;
+    border: 20px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+.Longtext{
+    width: 1500px;
+    position: relative;
+    margin-right: 20px;
+    flex-shrink: 0;
+    margin-bottom: 5px;
+}
+.Longtext:last-child:after{
+    content: "";
+    display: block;
+    position: absolute;
+    right: -20px;
+    width: 20px;
+    height: 20px;
+}

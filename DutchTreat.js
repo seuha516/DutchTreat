@@ -4,13 +4,17 @@ let Editmode=false
 let ProductNameList=['치킨 18000','피자 23000','짜장면 12000','회 30000','맥주 9000','만두 10000','음료 3000']
 let PersonNameList=['Kim','Park','Lee','Jeon','Choi','Jeong','Lim']
 
-let T,EditButton,info,CalcButton
+let T,EditButton,info,CalcButton,ResultPage,ResultText,CloseButton,DetailText
 
 window.onload = function InitSet(){
     T=document.getElementById('MainTable')
     EditButton=document.getElementById('EditButton')
     info=document.getElementById('info')
     CalcButton=document.getElementById('CalcButton')
+    ResultPage=document.getElementById('ResultPage')
+    ResultText=document.getElementById('ResultText')
+    CloseButton=document.getElementById('CloseButton')
+    DetailText=document.getElementById('DetailText')
     AddCol(); AddCol(); AddCol(); AddRow(); AddRow();
 }
 
@@ -36,6 +40,13 @@ function AddCol(){
         Newinput.addEventListener('click',CheckClick)
         Newinput.className='unchecked'
         NewCell.appendChild(Newinput)
+        for(let j=0;j<M-1;j++){
+            if(T.rows[i].cells[j].childNodes[0].className==='checked'){
+                T.rows[i].cells[M-1].childNodes[0].className='unchecked'
+                T.rows[i].cells[M-1].childNodes[0].disabled=true
+                break
+            }
+        }
     }
     M++
 }
@@ -195,6 +206,16 @@ function CheckClick(e){
         }
     }
 }
+function CloseResult(){
+    ResultPage.style.visibility="hidden"
+    CalcButton.style.visibility="visible"
+    info.style.visibility="visible"
+    EditButton.style.visibility="visible"
+    T.style.visibility="visible"
+    while(DetailText.hasChildNodes()){
+        DetailText.removeChild(DetailText.firstChild)
+    }
+}
 
 function Edit(){
     Editmode=!Editmode
@@ -221,11 +242,129 @@ function Edit(){
     T.rows[0].cells[M-1].childNodes[0].style.background=Editmode?'gray':'white'
 }
 function Calc(){
-    if(Editmode){
-        alert('\nFinish 버튼을 누른 후 실행하세요.')
-    }else if(1){
+    let Productname=[] //항목 이름
+    let Price=[] //항목의 가격
+    let payman=[] //돈을 낸 사람 번호
+    let name=[] //사람의 이름
+    let pays=[] //각자 낸 값
+    let needtopay=[] //서로 내야할 돈
+    let ProudctDividedN=[]
+    let TotalPrice=0
 
-    }else{
-
+    if(N==2 || M==2){
+        alert("항목 및 사람 수는 1 이상이어야 합니다.")
+        return
     }
+    for(let i=1;i<N-1;i++){
+        let S=T.rows[i].cells[0].childNodes[0].value
+        if(S==="") S=T.rows[i].cells[0].childNodes[0].placeholder
+        let Slist=S.split(" ")
+        if(isNaN(Slist[Slist.length-1])){
+            console.log(Slist[Slist.length-1])
+            alert("항목의 가격을 올바르게 입력했는지 확인해주세요.")
+            return
+        }
+        let P=Number(Slist[Slist.length-1])
+        Slist.pop()
+        Price.push(P)
+        Productname.push(Slist.join(" "))
+        let peoplelist=[] //돈을 내야할 사람들
+        let temp=-1
+        for(let j=1;j<M-1;j++){
+            if(T.rows[i].cells[j].childNodes[0].className==='checked'){
+                temp=j;
+            }
+            if(T.rows[i].cells[j].className==='pay'){
+                peoplelist.push(j-1)
+            }
+            if(i==1){
+                let nameS=T.rows[0].cells[j].childNodes[0].value
+                if(nameS==="") nameS=T.rows[0].cells[j].childNodes[0].placeholder
+                name.push(nameS)
+                pays.push(0)
+                needtopay.push(0)
+            }
+        }
+        if(temp===-1){
+            alert("각 항목에 대해 결제한 사람을 체크해 주세요.")
+            return
+        }else{
+            payman.push(temp-1)
+        }
+        let peoplesize=peoplelist.length
+        if(peoplesize===0){
+            alert("각 항목에 대해 참여자가 적어도 1명은 있어야 합니다.")
+            return
+        }
+        let result=P/peoplesize
+        ProudctDividedN.push(parseInt(result))
+        for(let i=0;i<peoplesize;i++){
+            needtopay[peoplelist[i]]+=result
+        }
+    }
+    for(let i=0;i<N-2;i++){
+        TotalPrice+=Price[i]
+        pays[payman[i]]+=Price[i]
+    }
+
+    let V=[]
+    for(let i=0;i<M-2;i++){
+        V.push({val:parseInt(needtopay[i]-pays[i]), idx:i})
+        needtopay[i]-=pays[i]
+    }
+    V.sort(function(a,b){return b.val-a.val})
+    //for(let i=0;i<V.length;i++){console.log(name[V[i].idx]+"가 내야 할 돈 "+String(V[i].val))}
+    let Answer=[]
+    while(V.length>1){
+        let HowMuch=Math.min(V[0].val,V[V.length-1].val*(-1))
+        Answer.push({giver:V[0].idx,receiver:V[V.length-1].idx,money:HowMuch})
+        if(V[0].val<V[V.length-1].val*(-1)){
+            V[V.length-1].val+=HowMuch
+            V.shift()
+        }else{
+            V[0].val-=HowMuch
+            V.pop()
+        }
+        V.sort(function(a,b){return b.val-a.val})
+        //for(let i=0;i<V.length;i++){console.log(name[V[i].idx]+"가 내야 할 돈 "+String(V[i].val))}
+    }
+    Answer.sort(function(a,b){return a.giver-b.giver})
+
+    AnswerString="\n"
+    for(let i=0;i<Answer.length;i++){
+        if(Answer[i].money===0) continue
+        AnswerString+=name[Answer[i].giver]+" ==== "+String(Answer[i].money)+" ====> "+name[Answer[i].receiver]+"\n"
+    }
+
+    let Dstrings=[]
+    for(let i=0;i<M-2;i++){
+        Dstrings.push(name[i]+": ")
+    }
+    for(let i=0;i<N-2;i++){
+        for(let j=0;j<M-2;j++){
+            if(T.rows[i+1].cells[j+1].className==='pay'){
+                Dstrings[j]+="+"+String(ProudctDividedN[i])+"("+Productname[i]+")"
+            }
+        }
+    }
+    for(let i=0;i<N-2;i++){
+        Dstrings[payman[i]]+="-"+String(Price[i])+"("+Productname[i]+")"
+    }
+    for(let i=0;i<M-2;i++){
+        Dstrings[i]+=" = "+String(parseInt(needtopay[i]))
+        let newtext=document.createElement('div')
+        newtext.className="Longtext"
+        newtext.innerText=Dstrings[i]
+        DetailText.appendChild(newtext)
+    }
+
+    console.log(needtopay); console.log(Answer);  
+
+    T.style.visibility="hidden"
+    CalcButton.style.visibility="hidden"
+    info.style.visibility="hidden"
+    EditButton.style.visibility="hidden"
+    ResultPage.style.visibility="visible"
+
+    ResultText.innerText=AnswerString
 }
