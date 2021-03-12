@@ -264,8 +264,6 @@ function Calc(){
     let TotalPrice=0
     StringToCopy=""
 
-    CopyButton.style.visibility="visible"
-
     if(N==2 || M==2){
         alert("항목 및 사람 수는 1 이상이어야 합니다.")
         return
@@ -381,6 +379,7 @@ function Calc(){
     info.style.visibility="hidden"
     EditButton.style.visibility="hidden"
     ResultPage.style.visibility="visible"
+    CopyButton.style.visibility="visible"
 
     ResultText.innerText=AnswerString
     StringToCopy="<Result>  // 정산 결과"+AnswerString+"\n<Detail>  // 내야 할 돈 계산 과정\n"+StringToCopy
