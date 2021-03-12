@@ -299,7 +299,7 @@ function Calc(){
         let result=P/peoplesize
         ProudctDividedN.push(parseInt(result))
         for(let i=0;i<peoplesize;i++){
-            needtopay[peoplelist[i]]+=result
+            needtopay[peoplelist[i]]+=parseInt(result)
         }
     }
     for(let i=0;i<N-2;i++){
