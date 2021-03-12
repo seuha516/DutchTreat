@@ -382,5 +382,5 @@ function Calc(){
     ResultPage.style.visibility="visible"
 
     ResultText.innerText=AnswerString
-    StringToCopy="<Result>"+AnswerString+"\n<Detail>\n"+StringToCopy
+    StringToCopy="<Result>  // 정산 결과"+AnswerString+"\n<Detail>  // 내야 할 돈 계산 과정\n"+StringToCopy
 }
