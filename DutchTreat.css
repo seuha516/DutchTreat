@@ -77,7 +77,7 @@ input::placeholder{
     font-weight: bold;
 }
 #ResultPage{
-    width: 700px;
+    width: 550px;
     height: 600px;
     position: fixed;
     border-style: outset;
@@ -108,7 +108,7 @@ input::placeholder{
     font-size: 20px;
     position: fixed;
     top: 75px;
-    left: 735px;
+    left: 585px;
 }
 #DetailText{
     font-size: 20px;
