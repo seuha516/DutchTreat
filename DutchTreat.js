@@ -359,7 +359,7 @@ function Calc(){
         }
     }
     for(let i=0;i<N-2;i++){
-        Dstrings[payman[i]]+="-"+String(Price[i])+"("+Productname[i]+")"
+        Dstrings[payman[i]]+="-"+String(Price[i])+"["+Productname[i]+"]"
     }
     for(let i=0;i<M-2;i++){
         Dstrings[i]+=" = "+String(parseInt(needtopay[i]))
@@ -379,5 +379,5 @@ function Calc(){
     ResultPage.style.visibility="visible"
 
     ResultText.innerText=AnswerString
-    StringToCopy="<Result>\n"+AnswerString+"\n"+StringToCopy
+    StringToCopy="<Result>\n"+AnswerString+"\nDetail\n"+StringToCopy
 }
