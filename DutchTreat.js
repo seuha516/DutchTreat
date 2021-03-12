@@ -209,6 +209,7 @@ function CheckClick(e){
 }
 function CloseResult(){
     ResultPage.style.visibility="hidden"
+    CopyButton.style.visibility="hidden"
     CalcButton.style.visibility="visible"
     info.style.visibility="visible"
     EditButton.style.visibility="visible"
