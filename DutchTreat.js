@@ -382,5 +382,5 @@ function Calc(){
     ResultPage.style.visibility="visible"
 
     ResultText.innerText=AnswerString
-    StringToCopy="<Result>\n"+AnswerString+"\nDetail\n"+StringToCopy
+    StringToCopy="<Result>"+AnswerString+"\n<Detail>\n"+StringToCopy
 }
