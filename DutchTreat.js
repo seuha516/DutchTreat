@@ -3,8 +3,8 @@ let M=2
 let Editmode=false
 let ProductNameList=['치킨 18000','피자 23000','짜장면 12000','회 30000','맥주 9000','만두 10000','음료 3000']
 let PersonNameList=['Kim','Park','Lee','Jeon','Choi','Jeong','Lim']
-
-let T,EditButton,info,CalcButton,ResultPage,ResultText,CloseButton,DetailText
+let StringToCopy=""
+let T,EditButton,info,CalcButton,ResultPage,ResultText,CloseButton,DetailText,CopyButton
 
 window.onload = function InitSet(){
     T=document.getElementById('MainTable')
@@ -15,6 +15,7 @@ window.onload = function InitSet(){
     ResultText=document.getElementById('ResultText')
     CloseButton=document.getElementById('CloseButton')
     DetailText=document.getElementById('DetailText')
+    CopyButton=document.getElementById('CopyButton')
     AddCol(); AddCol(); AddCol(); AddRow(); AddRow();
 }
 
@@ -216,6 +217,15 @@ function CloseResult(){
         DetailText.removeChild(DetailText.firstChild)
     }
 }
+function Copy(){
+    console.log(StringToCopy)
+    var Clip = document.createElement("textarea")
+    document.body.appendChild(Clip)
+    Clip.value=StringToCopy
+    Clip.select()
+    document.execCommand("copy")
+    document.body.removeChild(Clip)
+}
 
 function Edit(){
     Editmode=!Editmode
@@ -250,6 +260,7 @@ function Calc(){
     let needtopay=[] //서로 내야할 돈
     let ProudctDividedN=[]
     let TotalPrice=0
+    StringToCopy=""
 
     if(N==2 || M==2){
         alert("항목 및 사람 수는 1 이상이어야 합니다.")
@@ -356,6 +367,7 @@ function Calc(){
         newtext.className="Longtext"
         newtext.innerText=Dstrings[i]
         DetailText.appendChild(newtext)
+        StringToCopy+=Dstrings[i]+"\n"
     }
 
     console.log(needtopay); console.log(Answer);  
@@ -367,4 +379,5 @@ function Calc(){
     ResultPage.style.visibility="visible"
 
     ResultText.innerText=AnswerString
+    StringToCopy="<Result>\n"+AnswerString+"\n"+StringToCopy
 }

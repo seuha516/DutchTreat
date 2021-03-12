@@ -110,6 +110,14 @@ input::placeholder{
     top: 75px;
     left: 585px;
 }
+#CopyButton{
+    width: 70px;
+    height: 35px;
+    font-size: 20px;
+    position: fixed;
+    top: 75px;
+    left: 500px;
+}
 #DetailText{
     font-size: 20px;
     border: 20px;
