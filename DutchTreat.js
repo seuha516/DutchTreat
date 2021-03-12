@@ -224,6 +224,7 @@ function Copy(){
     Clip.value=StringToCopy
     Clip.select()
     document.execCommand("copy")
+    alert("복사되었습니다.")
     document.body.removeChild(Clip)
 }
 
