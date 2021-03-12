@@ -352,7 +352,7 @@ function Calc(){
 
     let Dstrings=[]
     for(let i=0;i<M-2;i++){
-        Dstrings.push(name[i]+"--> ")
+        Dstrings.push(name[i]+" --> ")
     }
     for(let i=0;i<N-2;i++){
         for(let j=0;j<M-2;j++){
