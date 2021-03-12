@@ -224,7 +224,7 @@ function Copy(){
     Clip.value=StringToCopy
     Clip.select()
     document.execCommand("copy")
-    alert("복사되었습니다.")
+    CopyButton.style.visibility="hidden"
     document.body.removeChild(Clip)
 }
 
@@ -262,6 +262,8 @@ function Calc(){
     let ProudctDividedN=[]
     let TotalPrice=0
     StringToCopy=""
+
+    CopyButton.style.visibility="visible"
 
     if(N==2 || M==2){
         alert("항목 및 사람 수는 1 이상이어야 합니다.")
