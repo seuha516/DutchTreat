@@ -1,3 +1,2 @@
 # DutchTreat
- 정산을 쉽게 해주는 웹사이트  
- https://seuha516.github.io/DutchTreat/DutchTreat.html
+* 정산을 쉽게 해주는 웹사이트(https://seuha516.github.io/DutchTreat/DutchTreat.html)
